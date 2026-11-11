@@ -3,14 +3,15 @@ import { useEffect, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, NavLink, useMatch } from 'react-router-dom'
 import logo from '../assets/logo.webp'
-import { DISCOUNT } from '../cart/cart'
+import { DISCOUNT } from '../data/shop'
 import { AddedToast } from './cart/AddedToast'
 import { CartButton } from './cart/CartButton'
+import { LanguageSwitch } from './LanguageSwitch'
 
 const LINKS = [
-    { to: '/linfa/piante', key: 'header.plants' },
-    { to: '/linfa#luce', key: 'header.lightGuide' },
-    { to: '/linfa#domande', key: 'header.faq' },
+    { to: '/piante', key: 'header.plants' },
+    { to: '/#luce', key: 'header.lightGuide' },
+    { to: '/#domande', key: 'header.faq' },
 ]
 
 const linkClass =
@@ -18,7 +19,7 @@ const linkClass =
 
 /** Striscia in cima a ogni pagina: il codice sconto di prova, con «Copia». */
 function PromoStrip() {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const [copied, setCopied] = useState(false)
 
     useEffect(() => {
@@ -38,8 +39,7 @@ function PromoStrip() {
 
     return (
         <div className="bg-buccia-600 text-polpa-50">
-            {/* pl maggiorato fino a md: a sinistra c'è la pillola fissa "torna a flowsi" (più piccola sotto sm). */}
-            <div className="mx-auto flex min-h-10 w-full max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-0.5 py-1.5 pl-[6.25rem] pr-4 text-sm sm:pl-[7.25rem] md:px-8">
+            <div className="mx-auto flex min-h-10 w-full max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-0.5 px-4 py-1.5 text-sm sm:px-6 lg:px-8">
                 <p className="text-center sm:hidden">
                     <Trans
                         t={t}
@@ -76,20 +76,20 @@ function PromoStrip() {
 }
 
 export function LinfaHeader() {
-    const { t } = useTranslation('linfa')
-    const onCatalog = useMatch('/linfa/piante')
+    const { t } = useTranslation()
+    const onCatalog = useMatch('/piante')
 
     return (
         <>
             <PromoStrip />
             <header className="sticky top-0 z-40 border-b border-argilla-200 bg-polpa-50/95 backdrop-blur-md">
-                {/* Tre colonne: link, logo al centro, carrello. A sinistra, da lg, i link lasciano
-                    spazio alla pillola fissa "torna a flowsi" (finisce a 104px). */}
+                {/* Da lg tre colonne: link, logo al centro, lingua e carrello. Sotto lg i link
+                    spariscono e il logo va a sinistra: centrato non lascerebbe spazio a destra. */}
                 <nav
                     aria-label={t('header.nav')}
-                    className="mx-auto grid h-20 w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 sm:px-6 lg:px-8"
+                    className="mx-auto grid h-20 w-full max-w-7xl grid-cols-[auto_1fr] items-center gap-3 px-4 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-8"
                 >
-                    <ul className="hidden items-center gap-7 lg:flex lg:pl-20">
+                    <ul className="hidden items-center gap-7 lg:flex">
                         {LINKS.map((link) => (
                             <li key={link.to}>
                                 {/* Solo «Piante» è una pagina: le ancore della home non vanno segnate come attive. */}
@@ -109,22 +109,23 @@ export function LinfaHeader() {
                         ))}
                     </ul>
 
-                    <Link to="/linfa" className="col-start-2 flex items-center gap-2 rounded-lg">
+                    <Link to="/" className="flex items-center gap-2 rounded-lg lg:col-start-2">
                         <img src={logo} alt="" width={194} height={256} className="h-12 w-auto" />
                         <span className="font-display text-[1.75rem] font-semibold tracking-tight text-nocciolo-800 [font-variation-settings:'SOFT'_100]">
                             Linfa
                         </span>
                     </Link>
 
-                    <div className="col-start-3 flex items-center justify-self-end gap-1 sm:gap-2">
+                    <div className="flex items-center justify-self-end gap-1.5 sm:gap-2 lg:col-start-3">
                         <NavLink
-                            to="/linfa/piante"
+                            to="/piante"
                             className={({ isActive }) =>
                                 `${linkClass} px-2 max-[374px]:hidden lg:hidden ${isActive ? 'underline' : ''}`
                             }
                         >
                             {t('header.plants')}
                         </NavLink>
+                        <LanguageSwitch />
                         <div className="relative">
                             <CartButton />
                             {!onCatalog && <AddedToast />}

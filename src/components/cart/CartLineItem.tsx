@@ -14,7 +14,7 @@ const STEP =
 
 /** Riga del carrello: entra e esce in altezza, e si illumina quando la stessa pianta viene aggiunta. */
 export function CartLineItem({ line }: { line: CartLine }) {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { setQty, remove, lastAdded } = useCart()
     const reduce = useReducedMotion()
     const [scope, animate] = useAnimate<HTMLDivElement>()

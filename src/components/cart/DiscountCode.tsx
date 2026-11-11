@@ -1,35 +1,55 @@
-import { CircleAlert, Tag } from 'lucide-react'
+import { CircleAlert, LoaderCircle, Tag } from 'lucide-react'
 import { useAnimate, useReducedMotion } from 'motion/react'
 import type { FormEvent } from 'react'
 import { useId, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { DISCOUNT } from '../../cart/cart'
-import type { CodeCheck } from '../../cart/cart'
+import { InvalidCodeError } from '../../api/checkout'
 import { useCart } from '../../cart/CartContext'
+import { DISCOUNT } from '../../data/shop'
+
+/** Errore del campo: resta un dato, il testo si sceglie al render nella lingua attiva. */
+type CodeError = { kind: 'empty' } | { kind: 'invalid'; typed: string } | { kind: 'unknown' }
+
+const ERROR_KEYS: Record<CodeError['kind'], string> = {
+    empty: 'code.empty',
+    invalid: 'code.invalid',
+    unknown: 'code.unknown',
+}
 
 /** Campo del codice sconto; una volta applicato diventa un'etichetta con «Rimuovi». */
 export function DiscountCode() {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { code, applyCode, removeCode } = useCart()
     const [value, setValue] = useState('')
-    // L'errore resta un codice: il testo si sceglie al render, nella lingua attiva.
-    const [error, setError] = useState<Exclude<CodeCheck, { ok: true }> | null>(null)
+    const [pending, setPending] = useState(false)
+    const [error, setError] = useState<CodeError | null>(null)
     const [scope, animate] = useAnimate<HTMLDivElement>()
     const reduce = useReducedMotion()
     const id = useId()
 
-    function handleSubmit(e: FormEvent) {
-        e.preventDefault()
-        const result = applyCode(value)
-        if (result.ok) {
-            setValue('')
-            setError(null)
-            return
-        }
-        setError(result)
+    function reject(next: CodeError) {
+        setError(next)
         // Una piccola scossa: il codice è stato letto, ma rifiutato.
         if (!reduce && scope.current) {
             animate(scope.current, { x: [0, -7, 6, -4, 3, 0] }, { duration: 0.38, ease: 'easeOut' })
+        }
+    }
+
+    async function handleSubmit(e: FormEvent) {
+        e.preventDefault()
+        if (pending) return
+        // Il campo vuoto si controlla qui, senza disturbare il server.
+        if (!value.trim()) return reject({ kind: 'empty' })
+        setPending(true)
+        setError(null)
+        try {
+            await applyCode(value)
+            setValue('')
+        } catch (err) {
+            if (err instanceof InvalidCodeError) reject({ kind: 'invalid', typed: err.typed })
+            else reject({ kind: 'unknown' })
+        } finally {
+            setPending(false)
         }
     }
 
@@ -78,6 +98,7 @@ export function DiscountCode() {
                         setValue(e.target.value)
                         if (error) setError(null)
                     }}
+                    readOnly={pending}
                     autoComplete="off"
                     autoCapitalize="characters"
                     spellCheck={false}
@@ -90,17 +111,20 @@ export function DiscountCode() {
                 />
                 <button
                     type="submit"
-                    className="h-11 rounded-lg bg-polpa-25 px-4 font-semibold text-buccia-700 ring-1 ring-buccia-600 transition-colors hover:bg-buccia-600 hover:text-polpa-50"
+                    disabled={pending}
+                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-polpa-25 px-4 font-semibold text-buccia-700 ring-1 ring-buccia-600 transition-colors hover:bg-buccia-600 hover:text-polpa-50 disabled:cursor-wait disabled:bg-polpa-25 disabled:text-buccia-700"
                 >
-                    {t('code.apply')}
+                    {pending && <LoaderCircle aria-hidden="true" className="size-4 animate-spin motion-reduce:animate-none" />}
+                    {pending ? t('code.checking') : t('code.apply')}
                 </button>
             </div>
             <p id={`${id}-errore`} role="alert" className="text-sm font-medium text-nocciolo-700 empty:hidden">
                 {error && (
                     <span className="mt-2 flex items-start gap-1.5">
                         <CircleAlert aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
-                        {t(error.error === 'empty' ? 'code.empty' : 'code.invalid', {
-                            typed: error.error === 'invalid' ? error.typed : '',
+                        {t(ERROR_KEYS[error.kind], {
+                            typed: error.kind === 'invalid' ? error.typed : '',
+                            code: DISCOUNT.code,
                         })}
                     </span>
                 )}

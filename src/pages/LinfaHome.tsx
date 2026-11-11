@@ -2,9 +2,9 @@ import { ArrowRight, Plus } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { formatList } from '../i18n/demo'
+import { formatList } from '../i18n/locale'
 import { Reveal } from '../components/ui/Reveal'
-import { DISCOUNT, SHIPPING } from '../cart/cart'
+import { DELIVERY, DISCOUNT, GUARANTEE_DAYS, SHIPPING } from '../data/shop'
 import { BestsellerCarousel } from '../components/BestsellerCarousel'
 import { LightGuide } from '../components/LightGuide'
 import { PlantArt } from '../components/PlantArt'
@@ -25,11 +25,15 @@ type FaqItem = { q: string; a: string }
 
 export function LinfaHome() {
     useScrollToHash()
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const reduce = useReducedMotion()
     const cost = formatEuro(SHIPPING.cost)
     const freeFrom = formatEuro(SHIPPING.freeFrom)
-    const steps = t('home.steps', { returnObjects: true }) as Step[]
+    const steps = t('home.steps', {
+        returnObjects: true,
+        hours: DELIVERY.transitHours,
+        days: GUARANTEE_DAYS,
+    }) as Step[]
     // I nomi nelle risposte sulla sicurezza arrivano dal catalogo, così restano uguali a quelli delle schede.
     const names = (slugs: string[]) => slugs.map(plantName)
     const faq = t('home.faq', {
@@ -37,6 +41,7 @@ export function LinfaHome() {
         cost,
         freeFrom,
         code: DISCOUNT.code,
+        days: GUARANTEE_DAYS,
         safe: formatList(names(['pilea', 'calathea', 'felce', 'kentia'])),
         others: names(['monstera', 'pothos', 'aloe']).join(', '),
     }) as FaqItem[]
@@ -55,7 +60,7 @@ export function LinfaHome() {
                         {t('home.intro')}
                     </p>
                     <Link
-                        to="/linfa/piante"
+                        to="/piante"
                         className="group mt-9 inline-flex h-13 items-center gap-2.5 rounded-lg bg-buccia-600 px-7 text-lg font-semibold text-polpa-50 transition-colors hover:bg-buccia-800 active:translate-y-px"
                     >
                         {t('home.cta')}
@@ -84,7 +89,7 @@ export function LinfaHome() {
                                     className={`${arch.height} w-[31%] sm:w-[19%] ${arch.outer ? 'hidden sm:block' : ''}`}
                                 >
                                     <Link
-                                        to={`/linfa/piante#${plant.slug}`}
+                                        to={`/piante#${plant.slug}`}
                                         className="group relative flex h-full flex-col items-center rounded-t-full"
                                     >
                                         <PlantArt

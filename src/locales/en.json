@@ -74,17 +74,18 @@
         "withHeight": "{{label}}, {{height}} cm"
     },
     "priceBands": {
-        "fino-20": "Up to 20",
-        "20-40": "20–40",
-        "oltre-40": "Over 40"
+        "upTo": "Up to {{max}}",
+        "between": "{{min}}–{{max}}",
+        "over": "Over {{min}}"
     },
     "header": {
         "nav": "Main",
         "plants": "Plants",
         "lightGuide": "Light guide",
         "faq": "FAQ",
+        "language": "Language",
         "promoShort": "−{{percent}}% with <code>{{code}}</code>",
-        "promoLong": "First order? Use <code>{{code}}</code> for {{percent}}% off",
+        "promoLong": "Use <code>{{code}}</code> for {{percent}}% off",
         "promoMore": " all plants",
         "copy": "Copy",
         "copied": "Copied",
@@ -97,6 +98,8 @@
         "lightGuide": "Light guide",
         "delivery": "Delivery",
         "faq": "FAQ",
+        "email": "Email: ",
+        "phone": "Phone: ",
         "legal": "Shipping {{cost}}, free from {{freeFrom}} · Prices include VAT · © {{year}} Linfa"
     },
     "home": {
@@ -115,11 +118,11 @@
                 "text": "We wrap it in paper along with its pot, secure it in the box and hand it to the courier."
             },
             {
-                "when": "Within 48 hours",
+                "when": "Within {{hours}} hours",
                 "text": "It arrives at your door with a card explaining where to put it and how much water to give it."
             },
             {
-                "when": "In the first 30 days",
+                "when": "In the first {{days}} days",
                 "text": "If it arrives damaged or doesn't settle in, write to us with a photo: we'll send you another."
             }
         ],
@@ -144,7 +147,7 @@
             },
             {
                 "q": "What if the plant arrives damaged?",
-                "a": "Reply to the order confirmation email within 30 days with a photo: we'll send you another or refund you, whichever you prefer."
+                "a": "Reply to the order confirmation email within {{days}} days with a photo: we'll send you another or refund you, whichever you prefer."
             }
         ]
     },
@@ -162,9 +165,9 @@
         "text": "Before choosing a plant, look at where you'll put it: light decides whether it will thrive. Pick the option that looks most like your room.",
         "legend": "Room light",
         "options": {
-            "1": { "title": "Low light", "rooms": "Bathroom, hallway, a corner away from the window." },
-            "2": { "title": "Indirect light", "rooms": "A bright living room or bedroom, a couple of metres from the window." },
-            "3": { "title": "Direct sun", "rooms": "Windowsill, glass door or terrace with a few hours of sun." }
+            "1": { "rooms": "Bathroom, hallway, a corner away from the window." },
+            "2": { "rooms": "A bright living room or bedroom, a couple of metres from the window." },
+            "3": { "rooms": "Windowsill, glass door or terrace with a few hours of sun." }
         },
         "see": {
             "1": "See the {{n}} plants for low light in the shop",
@@ -220,8 +223,6 @@
         "free": "Free",
         "total": "Total",
         "vat": "VAT included",
-        "checkout": "Proceed to checkout",
-        "demoNote": "This is a demo: payment is not active and no order is sent. Your basket stays saved on this device.",
         "view": "View basket",
         "added": "Added to basket",
         "addedBar": "{{name}} added",
@@ -231,16 +232,36 @@
         "shippingLabel": "Free shipping",
         "shippingValue": "{{reached}} of {{freeFrom}}"
     },
+    "checkout": {
+        "submit": "Place order",
+        "sending": "Placing your order…",
+        "note": "Simulated order: no payment, no shipping.",
+        "errorCode": "The {{code}} code is no longer valid, so we removed it: check the new total and confirm again.",
+        "errorEmpty": "Your basket is empty: you may have emptied it in another tab.",
+        "errorUnknown": "We couldn't place your order. Please try again in a moment."
+    },
+    "order": {
+        "title": "Order received, thank you!",
+        "number": "Order number",
+        "items": "Plants",
+        "total": "Total",
+        "delivery": "Delivery by",
+        "demoNote": "This is a demo site: nothing has been charged and no plant will actually ship. The order is only saved in this browser.",
+        "continue": "Keep browsing",
+        "close": "Close"
+    },
     "code": {
         "label": "Discount code",
         "try": "Try <strong>{{code}}</strong>",
         "placeholder": "Your code",
         "apply": "Apply",
+        "checking": "Checking…",
         "remove": "Remove",
         "removeSr": " the discount code",
         "appliedSr": " discount applied",
         "empty": "Enter a code before applying it.",
-        "invalid": "The code “{{typed}}” isn't valid. Check that you typed it correctly."
+        "invalid": "The code “{{typed}}” isn't valid. Check that you typed it correctly.",
+        "unknown": "We couldn't check the code. Please try again in a moment."
     },
     "announce": {
         "added": "{{name}} added to the basket. In the basket: {{plants}}.",
@@ -248,6 +269,7 @@
         "removed": "{{name}} removed from the basket.",
         "restored": "{{name}} back in the basket.",
         "codeApplied": "Code {{code}} applied: {{percent}}% off.",
-        "codeRemoved": "Discount code removed."
+        "codeRemoved": "Discount code removed.",
+        "ordered": "Order {{number}} received. Your basket has been emptied."
     }
 }

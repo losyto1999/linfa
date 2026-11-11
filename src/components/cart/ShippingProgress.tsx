@@ -1,12 +1,12 @@
 import { Check, Truck } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { Trans, useTranslation } from 'react-i18next'
-import { SHIPPING } from '../../cart/cart'
+import { SHIPPING } from '../../data/shop'
 import { formatEuro } from '../../data/plants'
 
 /** Barra da 0 a 49,99 €: quanto manca alla spedizione gratuita (misurata sul subtotale). */
 export function ShippingProgress({ subtotal }: { subtotal: number }) {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const reduce = useReducedMotion()
     const reached = Math.min(subtotal, SHIPPING.freeFrom)
     const missing = SHIPPING.freeFrom - reached

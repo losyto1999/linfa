@@ -1,4 +1,4 @@
-import { currentLocale, demoT } from '../i18n/demo'
+import { currentLocale, translate as t } from '../i18n/locale'
 
 // Catalogo del negozio. I prezzi sono in centesimi, così i totali del carrello restano esatti.
 
@@ -188,8 +188,6 @@ export type LevelKey = 'light' | 'care' | 'size'
 
 export const LEVEL_KEYS: LevelKey[] = ['light', 'care', 'size']
 
-const t = (key: string, options?: Record<string, unknown>) => demoT('linfa')(key, options)
-
 /** Nome comune della pianta nella lingua attiva. */
 export const plantName = (slug: string) => t(`plants.${slug}.name`)
 
@@ -208,14 +206,37 @@ export function describeLevel(plant: Plant, key: LevelKey) {
     return key === 'size' ? t('levels.withHeight', { label, height: plant.heightCm }) : label
 }
 
-/** Fasce di prezzo dei filtri, in euro (il simbolo sta nel titolo del gruppo). */
-export const PRICE_BANDS = [
-    { id: 'fino-20', min: 0, max: 2000 },
-    { id: '20-40', min: 2001, max: 4000 },
-    { id: 'oltre-40', min: 4001, max: Infinity },
-] as const
+/** Limiti delle fasce di prezzo dei filtri, in centesimi: fino a 20 €, da 20 a 40 €, oltre 40 €. */
+const PRICE_LIMITS = [2000, 4000]
 
-export const priceBandLabel = (id: string) => t(`priceBands.${id}`)
+export interface PriceBand {
+    /** Identificativo nella query string, es. `20-40`. */
+    id: string
+    /** Prezzo minimo escluso e massimo incluso, in centesimi. */
+    min: number
+    max: number
+}
+
+const euros = (cents: number) => cents / 100
+
+/** Fasce di prezzo dei filtri, ricavate da PRICE_LIMITS: `fino-20`, `20-40`, `oltre-40`. */
+export const PRICE_BANDS: PriceBand[] = [0, ...PRICE_LIMITS].map((min, i) => {
+    const max = PRICE_LIMITS[i] ?? Infinity
+    const id = i === 0 ? `fino-${euros(max)}` : max === Infinity ? `oltre-${euros(min)}` : `${euros(min)}-${euros(max)}`
+    return { id, min, max }
+})
+
+export const inPriceBand = (plant: Plant, band: PriceBand) => plant.price > band.min && plant.price <= band.max
+
+/** Etichetta di una fascia ("Fino a 20", "20–40", "Oltre 40"), in euro: il simbolo sta nel titolo del gruppo. */
+export function priceBandLabel(id: string) {
+    const band = PRICE_BANDS.find((b) => b.id === id)
+    if (!band) return id
+    const format = (cents: number) => new Intl.NumberFormat(currentLocale()).format(euros(cents))
+    if (band.min === 0) return t('priceBands.upTo', { max: format(band.max) })
+    if (band.max === Infinity) return t('priceBands.over', { min: format(band.min) })
+    return t('priceBands.between', { min: format(band.min), max: format(band.max) })
+}
 
 const euroFormats = new Map<string, Intl.NumberFormat>()
 

@@ -9,7 +9,7 @@ import { CountBadge } from './CountBadge'
 
 /** Barra fissa in basso nel catalogo su mobile: numero di piante, totale, apre il carrello. */
 export function MobileCartBar() {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { totals, openCart } = useCart()
     const { recent } = useRecentlyAdded(2200)
     const added = recent ? findPlant(recent.slug) : undefined

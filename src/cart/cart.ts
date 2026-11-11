@@ -1,19 +1,13 @@
 // Regole del carrello di Linfa: funzioni pure, senza React. Tutti gli importi sono in centesimi.
+// Il carrello resta nel browser (come quello di un ospite in un negozio vero); il controllo del
+// codice sconto e l'invio dell'ordine passano invece dalle API simulate in src/api/.
 import { findPlant } from '../data/plants'
+import { DISCOUNT, SHIPPING } from '../data/shop'
 
-/** Chiave in localStorage: il prefisso "linfa:" evita conflitti con le altre demo. */
+/** Chiave in localStorage: il prefisso "linfa:" evita conflitti con altri siti sullo stesso dominio. */
 export const STORAGE_KEY = 'linfa:carrello'
 
 export const MAX_QTY = 10
-
-/** L'unico codice valido: 10% sul subtotale. */
-export const DISCOUNT = { code: 'BENVENUTO10', percent: 10 } as const
-
-/**
- * Spedizione gratuita da 49,99 € di subtotale, altrimenti 7,99 €. La soglia si misura prima
- * dello sconto: così applicare il codice non fa mai pagare di più.
- */
-export const SHIPPING = { cost: 799, freeFrom: 4999 } as const
 
 export interface CartLine {
     slug: string
@@ -33,6 +27,7 @@ export type CartAction =
     | { type: 'applyCode' }
     | { type: 'removeCode' }
     | { type: 'replace'; state: CartState }
+    | { type: 'clear' }
 
 const clampQty = (qty: number) => Math.min(MAX_QTY, Math.max(1, Math.round(qty)))
 
@@ -68,6 +63,8 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
             return { ...state, code: null }
         case 'replace':
             return action.state
+        case 'clear':
+            return EMPTY
     }
 }
 
@@ -81,7 +78,7 @@ export interface Totals {
     total: number
 }
 
-export function getTotals(state: CartState): Totals {
+export function getTotals(state: Pick<CartState, 'lines' | 'code'>): Totals {
     let count = 0
     let subtotal = 0
     for (const line of state.lines) {
@@ -97,26 +94,24 @@ export function getTotals(state: CartState): Totals {
     return { count, subtotal, discount, shipping, total: subtotal - discount + shipping }
 }
 
-/** Esito del controllo: l'errore è un codice, il testo lo sceglie il componente nella lingua attiva. */
-export type CodeCheck = { ok: true } | { ok: false; error: 'empty' } | { ok: false; error: 'invalid'; typed: string }
+export const EMPTY: CartState = { lines: [], code: null }
 
-/** Controlla il codice scritto dal visitatore: maiuscole/minuscole e spazi non contano. */
-export function checkCode(input: string): CodeCheck {
-    const typed = input.trim()
-    if (!typed) return { ok: false, error: 'empty' }
-    if (typed.replace(/\s+/g, '').toUpperCase() !== DISCOUNT.code) return { ok: false, error: 'invalid', typed }
-    return { ok: true }
-}
-
-const EMPTY: CartState = { lines: [], code: null }
+// Copia in memoria: se il localStorage non è disponibile (navigazione privata, storage bloccato)
+// il carrello sopravvive almeno ai cambi di pagina, fino al ricaricamento.
+let memoryCopy: string | null = null
 
 /**
  * Legge il carrello salvato e lo ripulisce: scarta le piante che non sono più in catalogo,
  * riporta le quantità tra 1 e MAX_QTY e tiene il codice solo se è quello valido.
  */
 export function loadCart(): CartState {
+    let raw = memoryCopy
     try {
-        const raw = localStorage.getItem(STORAGE_KEY)
+        raw = localStorage.getItem(STORAGE_KEY) ?? memoryCopy
+    } catch {
+        // localStorage non disponibile: resta la copia in memoria.
+    }
+    try {
         if (!raw) return EMPTY
         const data = JSON.parse(raw) as { lines?: unknown; code?: unknown }
 
@@ -136,8 +131,9 @@ export function loadCart(): CartState {
 }
 
 export function saveCart(state: CartState) {
+    memoryCopy = JSON.stringify({ v: 1, ...state })
     try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: 1, ...state }))
+        localStorage.setItem(STORAGE_KEY, memoryCopy)
     } catch {
         // Storage pieno o disabilitato (es. navigazione privata): il carrello resta in memoria.
     }

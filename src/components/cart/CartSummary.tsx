@@ -3,14 +3,15 @@ import { AnimatePresence, useAnimate } from 'motion/react'
 import { useEffect, useId, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { SHIPPING } from '../../cart/cart'
 import { useCart } from '../../cart/CartContext'
 import { formatEuro, plantName } from '../../data/plants'
+import { SHIPPING } from '../../data/shop'
 import { PlantArt } from '../PlantArt'
 import { CartLineItem } from './CartLineItem'
 import { CartTotals } from './CartTotals'
-import { DemoCheckoutButton } from './DemoCheckoutButton'
+import { CheckoutButton } from './CheckoutButton'
 import { DiscountCode } from './DiscountCode'
+import { OrderConfirmation } from './OrderConfirmation'
 import { ShippingProgress } from './ShippingProgress'
 
 interface CartSummaryProps {
@@ -21,8 +22,8 @@ interface CartSummaryProps {
 
 /** Contenuto del carrello, uguale nella colonna del catalogo e nel pannello a scomparsa. */
 export function CartSummary({ variant, onClose }: CartSummaryProps) {
-    const { t } = useTranslation('linfa')
-    const { lines, totals, removed, undoRemove, summaryPing } = useCart()
+    const { t } = useTranslation()
+    const { lines, totals, removed, undoRemove, summaryPing, lastOrder, dismissOrder } = useCart()
     const titleId = useId()
     const titleRef = useRef<HTMLHeadingElement>(null)
     const [scope, animate] = useAnimate<HTMLElement>()
@@ -87,7 +88,19 @@ export function CartSummary({ variant, onClose }: CartSummaryProps) {
                 </p>
             )}
 
-            {empty ? (
+            {empty && lastOrder ? (
+                <OrderConfirmation
+                    order={lastOrder}
+                    onDismiss={dismissOrder}
+                    onContinue={
+                        onClose &&
+                        (() => {
+                            dismissOrder()
+                            onClose()
+                        })
+                    }
+                />
+            ) : empty ? (
                 <div className="flex flex-1 flex-col items-center justify-center py-8 text-center">
                     <PlantArt art="vuoto" tint="polpa" className="h-32 w-26 overflow-hidden rounded-t-full rounded-b-lg" />
                     <p className="mt-5 font-display text-xl font-semibold text-nocciolo-800">{t('cart.emptyTitle')}</p>
@@ -96,7 +109,7 @@ export function CartSummary({ variant, onClose }: CartSummaryProps) {
                     </p>
                     {variant === 'drawer' && (
                         <Link
-                            to="/linfa/piante"
+                            to="/piante"
                             onClick={onClose}
                             className="mt-6 inline-flex h-11 items-center gap-2 rounded-lg bg-buccia-600 px-5 font-semibold text-polpa-50 transition-colors hover:bg-buccia-800"
                         >
@@ -123,7 +136,7 @@ export function CartSummary({ variant, onClose }: CartSummaryProps) {
                     <div className="mt-3 space-y-5 border-t border-argilla-200 pt-5">
                         <DiscountCode />
                         <CartTotals />
-                        <DemoCheckoutButton />
+                        <CheckoutButton />
                     </div>
                 </>
             )}

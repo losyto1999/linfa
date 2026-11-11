@@ -6,12 +6,12 @@ import { LinfaPlants } from './pages/LinfaPlants'
 function App() {
     return (
         <Routes>
-            <Route path="/linfa" element={<LinfaLayout />}>
+            <Route element={<LinfaLayout />}>
                 <Route index element={<LinfaHome />} />
                 <Route path="piante" element={<LinfaPlants />} />
             </Route>
 
-            <Route path="*" element={<Navigate to="/linfa" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     )
 }

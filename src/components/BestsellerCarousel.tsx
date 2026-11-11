@@ -29,7 +29,7 @@ const ARROW =
  * insieme alla freccia.
  */
 export function BestsellerCarousel() {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const trackRef = useRef<HTMLUListElement>(null)
     const prevRef = useRef<HTMLButtonElement>(null)
     const nextRef = useRef<HTMLButtonElement>(null)

@@ -34,7 +34,7 @@ export function PlantFilters({
     onReset,
     className = '',
 }: PlantFiltersProps) {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const desktop = useMediaQuery(DESKTOP)
     const reduce = useReducedMotion()
     const [open, setOpen] = useState(false)

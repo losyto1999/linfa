@@ -9,7 +9,7 @@ import { CartSummary } from './CartSummary'
  * li gestisce il browser. Entrata e uscita sono transizioni CSS (@starting-style).
  */
 export function CartDrawer() {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { isOpen, closeCart } = useCart()
     const ref = useRef<HTMLDialogElement>(null)
 

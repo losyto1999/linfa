@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/ui/Reveal'
 import type { Level } from '../data/plants'
-import { formatEuro, plantName, PLANTS } from '../data/plants'
+import { formatEuro, levelLong, plantName, PLANTS } from '../data/plants'
 import { PlantArt } from './PlantArt'
 import { Pips } from './PlantMeters'
 
@@ -13,7 +13,7 @@ const LEVELS: Level[] = [1, 2, 3]
 
 /** «Quanta luce ha la tua stanza?»: tre fermate dall'ombra al sole e le piante adatte. */
 export function LightGuide() {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const [level, setLevel] = useState<Level>(2)
     const name = useId()
     const matches = PLANTS.filter((plant) => plant.light === level)
@@ -67,7 +67,7 @@ export function LightGuide() {
                                                 </span>
                                                 <span>
                                                     <span className="block font-display text-base font-semibold text-nocciolo-800 sm:text-xl">
-                                                        {t(`lightGuide.options.${optLevel}.title`)}
+                                                        {levelLong('light', optLevel)}
                                                     </span>
                                                     <span className="mt-1 hidden text-sm leading-snug text-nocciolo-700 sm:block">
                                                         {t(`lightGuide.options.${optLevel}.rooms`)}
@@ -96,7 +96,7 @@ export function LightGuide() {
                             {matches.map((plant) => (
                                 <li key={plant.slug}>
                                     <Link
-                                        to={`/linfa/piante#${plant.slug}`}
+                                        to={`/piante#${plant.slug}`}
                                         className="flex h-full items-center gap-3 rounded-xl bg-polpa-100 p-2.5 ring-1 ring-nocciolo-700/10 transition-colors hover:bg-polpa-25"
                                     >
                                         <PlantArt
@@ -118,7 +118,7 @@ export function LightGuide() {
                             ))}
                         </ul>
                         <Link
-                            to={`/linfa/piante?luce=${level}`}
+                            to={`/piante?luce=${level}`}
                             className="group mt-8 inline-flex items-center gap-2 font-semibold text-nocciolo-800 underline decoration-nocciolo-700/50 decoration-2 underline-offset-[0.4em] transition-colors hover:decoration-nocciolo-800"
                         >
                             {t(`lightGuide.see.${level}`, { n: matches.length })}

@@ -10,9 +10,9 @@ import { CountBadge } from './CountBadge'
  * il riepilogo è già accanto alla griglia: lì lo indica.
  */
 export function CartButton() {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { totals, openCart, pingSummary } = useCart()
-    const onCatalog = useMatch('/linfa/piante')
+    const onCatalog = useMatch('/piante')
     const desktop = useMediaQuery(DESKTOP)
     const summaryInPage = Boolean(onCatalog) && desktop
 

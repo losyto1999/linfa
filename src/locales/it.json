@@ -74,17 +74,18 @@
         "withHeight": "{{label}}, {{height}} cm"
     },
     "priceBands": {
-        "fino-20": "Fino a 20",
-        "20-40": "20–40",
-        "oltre-40": "Oltre 40"
+        "upTo": "Fino a {{max}}",
+        "between": "{{min}}–{{max}}",
+        "over": "Oltre {{min}}"
     },
     "header": {
         "nav": "Principale",
         "plants": "Piante",
         "lightGuide": "Guida alla luce",
         "faq": "Domande",
+        "language": "Lingua",
         "promoShort": "−{{percent}}% con <code>{{code}}</code>",
-        "promoLong": "Primo ordine? Con <code>{{code}}</code> hai il {{percent}}% di sconto",
+        "promoLong": "Con <code>{{code}}</code> hai il {{percent}}% di sconto",
         "promoMore": " su tutte le piante",
         "copy": "Copia",
         "copied": "Copiato",
@@ -97,6 +98,8 @@
         "lightGuide": "Guida alla luce",
         "delivery": "Consegna",
         "faq": "Domande",
+        "email": "Email: ",
+        "phone": "Telefono: ",
         "legal": "Spedizione {{cost}}, gratuita da {{freeFrom}} · Prezzi IVA inclusa · © {{year}} Linfa"
     },
     "home": {
@@ -115,11 +118,11 @@
                 "text": "La avvolgiamo nella carta insieme al vaso, la fissiamo nella scatola e la affidiamo al corriere."
             },
             {
-                "when": "Entro 48 ore",
+                "when": "Entro {{hours}} ore",
                 "text": "Arriva a casa tua con un cartoncino che spiega dove metterla e quanta acqua darle."
             },
             {
-                "when": "Nei primi 30 giorni",
+                "when": "Nei primi {{days}} giorni",
                 "text": "Se arriva rovinata o non si ambienta, scrivici con una foto: te ne mandiamo un’altra."
             }
         ],
@@ -144,7 +147,7 @@
             },
             {
                 "q": "E se la pianta arriva rovinata?",
-                "a": "Rispondi alla mail di conferma dell’ordine entro 30 giorni con una foto: te ne mandiamo un’altra o ti rimborsiamo, come preferisci."
+                "a": "Rispondi alla mail di conferma dell’ordine entro {{days}} giorni con una foto: te ne mandiamo un’altra o ti rimborsiamo, come preferisci."
             }
         ]
     },
@@ -162,9 +165,9 @@
         "text": "Prima di scegliere una pianta guarda dove la metterai: è la luce a decidere se starà bene. Scegli quella che somiglia di più alla tua stanza.",
         "legend": "Luce della stanza",
         "options": {
-            "1": { "title": "Poca luce", "rooms": "Bagno, corridoio, un angolo lontano dalla finestra." },
-            "2": { "title": "Luce indiretta", "rooms": "Soggiorno o camera luminosi, a un paio di metri dalla finestra." },
-            "3": { "title": "Sole diretto", "rooms": "Davanzale, vetrata o terrazzo con qualche ora di sole." }
+            "1": { "rooms": "Bagno, corridoio, un angolo lontano dalla finestra." },
+            "2": { "rooms": "Soggiorno o camera luminosi, a un paio di metri dalla finestra." },
+            "3": { "rooms": "Davanzale, vetrata o terrazzo con qualche ora di sole." }
         },
         "see": {
             "1": "Vedi le {{n}} piante per poca luce nel catalogo",
@@ -220,8 +223,6 @@
         "free": "Gratuita",
         "total": "Totale",
         "vat": "IVA inclusa",
-        "checkout": "Procedi all’ordine",
-        "demoNote": "Questa è una demo: il pagamento non è attivo e nessun ordine viene inviato. Il carrello resta salvato su questo dispositivo.",
         "view": "Vedi il carrello",
         "added": "Aggiunta al carrello",
         "addedBar": "{{name}} aggiunta",
@@ -231,16 +232,36 @@
         "shippingLabel": "Spedizione gratuita",
         "shippingValue": "{{reached}} su {{freeFrom}}"
     },
+    "checkout": {
+        "submit": "Conferma l’ordine",
+        "sending": "Invio dell’ordine…",
+        "note": "Ordine simulato: nessun pagamento, nessuna spedizione.",
+        "errorCode": "Il codice {{code}} non è più valido e l’abbiamo tolto: controlla il nuovo totale e conferma di nuovo.",
+        "errorEmpty": "Il carrello è vuoto: forse l’hai svuotato in un’altra scheda.",
+        "errorUnknown": "Non siamo riusciti a inviare l’ordine. Riprova tra un momento."
+    },
+    "order": {
+        "title": "Ordine ricevuto, grazie!",
+        "number": "Numero d’ordine",
+        "items": "Piante",
+        "total": "Totale",
+        "delivery": "Consegna entro",
+        "demoNote": "Questo è un sito dimostrativo: non è stato addebitato nulla e nessuna pianta partirà davvero. L’ordine resta salvato solo in questo browser.",
+        "continue": "Continua a guardare",
+        "close": "Chiudi"
+    },
     "code": {
         "label": "Codice sconto",
         "try": "Prova <strong>{{code}}</strong>",
         "placeholder": "Il tuo codice",
         "apply": "Applica",
+        "checking": "Verifica…",
         "remove": "Rimuovi",
         "removeSr": " il codice sconto",
         "appliedSr": " di sconto applicato",
         "empty": "Scrivi un codice prima di applicarlo.",
-        "invalid": "Il codice «{{typed}}» non è valido. Controlla di averlo scritto bene."
+        "invalid": "Il codice «{{typed}}» non è valido. Controlla di averlo scritto bene.",
+        "unknown": "Non siamo riusciti a controllare il codice. Riprova tra un momento."
     },
     "announce": {
         "added": "{{name}} aggiunta al carrello. Nel carrello: {{plants}}.",
@@ -248,6 +269,7 @@
         "removed": "{{name}} rimossa dal carrello.",
         "restored": "{{name}} di nuovo nel carrello.",
         "codeApplied": "Codice {{code}} applicato: {{percent}}% di sconto.",
-        "codeRemoved": "Codice sconto rimosso."
+        "codeRemoved": "Codice sconto rimosso.",
+        "ordered": "Ordine {{number}} ricevuto. Il carrello è stato svuotato."
     }
 }

@@ -1,20 +1,23 @@
 import type { ReactNode } from 'react'
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
-import { demoT } from '../i18n/demo'
+import type { Order } from '../api/checkout'
+import { InvalidCodeError, submitOrder, validateDiscountCode } from '../api/checkout'
 import { plantName } from '../data/plants'
-import { cartReducer, checkCode, DISCOUNT, getTotals, loadCart, MAX_QTY, saveCart, STORAGE_KEY } from './cart'
+import { DISCOUNT } from '../data/shop'
+import { translate as t } from '../i18n/locale'
+import { cartReducer, getTotals, loadCart, MAX_QTY, saveCart, STORAGE_KEY } from './cart'
 import type { CartContextValue, RemovedLine } from './CartContext'
 import { CartContext } from './CartContext'
 
 const UNDO_MS = 6000
 
 // Le frasi per gli screen reader si costruiscono al momento dell'azione, nella lingua attiva.
-const t = (key: string, options?: Record<string, unknown>) => demoT('linfa')(key, options)
 
 export function CartProvider({ children }: { children: ReactNode }) {
     const [state, dispatch] = useReducer(cartReducer, undefined, loadCart)
     const [removed, setRemoved] = useState<RemovedLine | null>(null)
     const [lastAdded, setLastAdded] = useState<CartContextValue['lastAdded']>(null)
+    const [lastOrder, setLastOrder] = useState<Order | null>(null)
     const [isOpen, setIsOpen] = useState(false)
     const [summaryPing, setSummaryPing] = useState(0)
     // Testo letto dagli screen reader a ogni modifica (regione aria-live qui sotto).
@@ -25,7 +28,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => saveCart(state), [state])
 
-    // Due schede aperte sulla demo restano allineate.
+    // Due schede aperte sul sito restano allineate.
     useEffect(() => {
         const onStorage = (e: StorageEvent) => {
             if (e.key === STORAGE_KEY) dispatch({ type: 'replace', state: loadCart() })
@@ -50,6 +53,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             qtyOf,
             add(slug) {
                 dispatch({ type: 'add', slug })
+                setLastOrder(null)
                 addCounter.current += 1
                 setLastAdded({ slug, id: addCounter.current })
                 const count = qtyOf(slug) < MAX_QTY ? totals.count + 1 : totals.count
@@ -73,18 +77,34 @@ export function CartProvider({ children }: { children: ReactNode }) {
                 setAnnouncement(t('announce.restored', { name: plantName(removed.line.slug) }))
                 setRemoved(null)
             },
-            applyCode(input) {
-                const result = checkCode(input)
-                if (result.ok) {
-                    dispatch({ type: 'applyCode' })
-                    setAnnouncement(t('announce.codeApplied', { code: DISCOUNT.code, percent: DISCOUNT.percent }))
-                }
-                return result
+            async applyCode(input) {
+                await validateDiscountCode(input)
+                dispatch({ type: 'applyCode' })
+                setAnnouncement(t('announce.codeApplied', { code: DISCOUNT.code, percent: DISCOUNT.percent }))
             },
             removeCode() {
                 dispatch({ type: 'removeCode' })
                 setAnnouncement(t('announce.codeRemoved'))
             },
+            async placeOrder() {
+                try {
+                    const order = await submitOrder({ lines: state.lines, code: state.code })
+                    dispatch({ type: 'clear' })
+                    setRemoved(null)
+                    setLastOrder(order)
+                    setAnnouncement(t('announce.ordered', { number: order.number }))
+                    return order
+                } catch (error) {
+                    // Il server rifiuta il codice: lo togliamo, il totale si aggiorna e il cliente
+                    // può confermare di nuovo.
+                    if (error instanceof InvalidCodeError) {
+                        dispatch({ type: 'removeCode' })
+                    }
+                    throw error
+                }
+            },
+            lastOrder,
+            dismissOrder: () => setLastOrder(null),
             lastAdded,
             isOpen,
             openCart: () => setIsOpen(true),
@@ -92,7 +112,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             summaryPing,
             pingSummary: () => setSummaryPing((n) => n + 1),
         }
-    }, [state, totals, removed, lastAdded, isOpen, summaryPing])
+    }, [state, totals, removed, lastAdded, lastOrder, isOpen, summaryPing])
 
     return (
         <CartContext.Provider value={value}>

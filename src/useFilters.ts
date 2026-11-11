@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { Level, LevelKey, Plant } from './data/plants'
-import { levelLabel, levelShort, PRICE_BANDS, priceBandLabel } from './data/plants'
-import { demoT } from './i18n/demo'
+import { inPriceBand, levelLabel, levelShort, PRICE_BANDS, priceBandLabel } from './data/plants'
+import { translate } from './i18n/locale'
 
 // I filtri del catalogo vivono nella query string (?luce=1&cura=1&cura=2): il link dalla
 // guida alla luce apre il catalogo già filtrato e la scelta sopravvive al tasto indietro.
@@ -39,13 +39,13 @@ export const FILTER_GROUPS: FilterGroup[] = [
         options: PRICE_BANDS.map((band, i) => ({ id: band.id, level: (i + 1) as Level })),
         test: (plant, id) => {
             const band = PRICE_BANDS.find((b) => b.id === id)
-            return !!band && plant.price >= band.min && plant.price <= band.max
+            return !!band && inPriceBand(plant, band)
         },
     },
 ]
 
 /** Testi dei gruppi e delle opzioni, nella lingua attiva. */
-export const groupLabel = (group: FilterGroup) => (group.meter ? levelLabel(group.meter) : demoT('linfa')('filters.price'))
+export const groupLabel = (group: FilterGroup) => (group.meter ? levelLabel(group.meter) : translate('filters.price'))
 export const optionLabel = (group: FilterGroup, option: FilterOption) =>
     group.meter ? levelShort(group.meter, option.level) : priceBandLabel(option.id)
 

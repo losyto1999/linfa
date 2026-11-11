@@ -11,7 +11,7 @@ const CONFIRM_MS = 1500
 
 /** «Aggiungi» che per un attimo diventa «Aggiunta», così il clic ha una risposta dove lo si fa. */
 export function AddToCartButton({ plant }: { plant: Plant }) {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { add, qtyOf } = useCart()
     // Cambia a ogni clic: fa ripartire la conferma anche con clic ravvicinati.
     const [addedAt, setAddedAt] = useState(0)

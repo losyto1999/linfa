@@ -15,7 +15,7 @@ interface PlantCardProps {
 
 /** Scheda di una pianta: immagine ad arco, prezzo, cartellini di luce/cura/dimensione e «Aggiungi». */
 export function PlantCard({ plant, anchor = false, className = '' }: PlantCardProps) {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { qtyOf } = useCart()
     const qty = qtyOf(plant.slug)
 

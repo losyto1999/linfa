@@ -1,7 +1,7 @@
 import { RotateCcw } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
-import { spellNumber } from '../i18n/demo'
+import { spellNumber } from '../i18n/locale'
 import { Reveal } from '../components/ui/Reveal'
 import { CartSummary } from '../components/cart/CartSummary'
 import { MobileCartBar } from '../components/cart/MobileCartBar'
@@ -16,7 +16,7 @@ const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1
 
 export function LinfaPlants() {
     useScrollToHash()
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { filters, activeCount, toggle, reset } = useFilters()
     const reduce = useReducedMotion()
     const visible = PLANTS.filter((plant) => matchesFilters(plant, filters))
@@ -30,7 +30,7 @@ export function LinfaPlants() {
                 <Reveal className="max-w-2xl">
                     <h1 className="text-5xl font-semibold tracking-tight sm:text-6xl">{t('plantsPage.title')}</h1>
                     <p className="mt-4 text-lg leading-relaxed">
-                        {capitalize(t('plantsPage.intro', { number: spellNumber('linfa', PLANTS.length) }))}
+                        {capitalize(t('plantsPage.intro', { number: spellNumber(PLANTS.length) }))}
                     </p>
                 </Reveal>
 

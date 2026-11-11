@@ -11,7 +11,7 @@ import { PlantArt } from '../PlantArt'
  * vede (la home). Il testo per gli screen reader lo legge già CartProvider.
  */
 export function AddedToast() {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { openCart } = useCart()
     const { recent, dismiss } = useRecentlyAdded(3500)
     const plant = recent ? findPlant(recent.slug) : undefined

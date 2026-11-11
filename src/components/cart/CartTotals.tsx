@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { DISCOUNT } from '../../cart/cart'
+import { DISCOUNT } from '../../data/shop'
 import { useCart } from '../../cart/CartContext'
 import { formatEuro } from '../../data/plants'
 import { AnimatedNumber } from '../AnimatedNumber'
@@ -17,7 +17,7 @@ function Row({ label, children, className = '' }: { label: ReactNode; children: 
 
 /** Subtotale, sconto, spedizione e totale: le cifre scorrono quando cambiano. */
 export function CartTotals() {
-    const { t } = useTranslation('linfa')
+    const { t } = useTranslation()
     const { totals, code } = useCart()
     const reduce = useReducedMotion()
 
