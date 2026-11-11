@@ -130,7 +130,7 @@ Configurazione, una sola volta: *Settings → Pages → Build and deployment →
 
 ## Lingua
 
-La lingua viene scelta in quest'ordine: il parametro `?lng=it` / `?lng=en` nell'URL, poi la scelta fatta con il selettore (salvata nel `localStorage` alla chiave `linfa:lang`), infine la lingua del browser. Se nessuna corrisponde, il sito è in italiano.
+La lingua viene scelta in quest'ordine: il parametro `?lng=it` / `?lng=en` nell'URL, poi la scelta fatta con il selettore (salvata nel `localStorage` alla chiave `linfa:lang`), infine la lingua del browser. Il parametro `lng`, una volta letto e salvato, viene tolto dall'URL (`src/i18n/index.ts`): l'indirizzo resta pulito e, ricaricando, non ha la precedenza su una scelta fatta poi con il selettore. Se nessuna corrisponde, il sito è in italiano.
 
 I testi stanno in `src/locales/it.json` e `src/locales/en.json` (namespace `linfa`). I due file hanno la stessa struttura di chiavi. `data/plants.ts` contiene solo i dati e il nome botanico. Nome comune e descrizione sono alla chiave `plants.<slug>`, le etichette dei livelli in `levels.*`. Si leggono con `plantName`, `levelLong`, `priceBandLabel`… Prezzi, date ed elenchi sono formattati con `Intl`. L'inglese usa `en-GB`, con l'euro (`€34.99`). Slug, URL, parametri dei filtri, ancore e il codice `BENVENUTO10` sono identificativi e restano uguali in tutte le lingue.
 
