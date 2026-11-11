@@ -2,6 +2,10 @@
 @import '@fontsource-variable/fraunces/full.css';
 @import '@fontsource-variable/figtree';
 
+/* Demo aperta dal portfolio: <html data-portfolio-back> (vedi portfolio/fromPortfolio.ts). Le classi
+   con back: lasciano spazio alla pillola fissa "torna al portfolio" in alto a sinistra. */
+@custom-variant back (&:where([data-portfolio-back] *));
+
 @theme {
     /* Fraunces con l'asse SOFT al massimo (vedi .linfa-root h1…) per i titoli, Figtree per il testo. */
     --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;

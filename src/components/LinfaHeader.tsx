@@ -39,7 +39,8 @@ function PromoStrip() {
 
     return (
         <div className="bg-buccia-600 text-polpa-50">
-            <div className="mx-auto flex min-h-10 w-full max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-0.5 px-4 py-1.5 text-sm sm:px-6 lg:px-8">
+            {/* Aperta dal portfolio (back:), il pl maggiorato fino a md lascia spazio alla pillola "torna al portfolio". */}
+            <div className="mx-auto flex min-h-10 w-full max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-0.5 px-4 py-1.5 text-sm sm:px-6 lg:px-8 back:pl-[6.25rem] back:sm:pl-[7.25rem] back:md:pl-8">
                 <p className="text-center sm:hidden">
                     <Trans
                         t={t}
@@ -84,12 +85,14 @@ export function LinfaHeader() {
             <PromoStrip />
             <header className="sticky top-0 z-40 border-b border-argilla-200 bg-polpa-50/95 backdrop-blur-md">
                 {/* Da lg tre colonne: link, logo al centro, lingua e carrello. Sotto lg i link
-                    spariscono e il logo va a sinistra: centrato non lascerebbe spazio a destra. */}
+                    spariscono e il logo va a sinistra: centrato non lascerebbe spazio a destra. Aperta dal portfolio
+                    (back:), logo e link lasciano spazio alla pillola fissa "torna al portfolio" (finisce a 104px):
+                    sotto i 420px, per farci stare tutto, il link «Piante» sparisce come sotto i 375px. */}
                 <nav
                     aria-label={t('header.nav')}
-                    className="mx-auto grid h-20 w-full max-w-7xl grid-cols-[auto_1fr] items-center gap-3 px-4 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-8"
+                    className="mx-auto grid h-20 w-full max-w-7xl grid-cols-[auto_1fr] items-center gap-3 px-4 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-8 back:pl-[5.75rem] back:sm:pl-[7.25rem] back:lg:pl-8"
                 >
-                    <ul className="hidden items-center gap-7 lg:flex">
+                    <ul className="hidden items-center gap-7 lg:flex back:lg:pl-20">
                         {LINKS.map((link) => (
                             <li key={link.to}>
                                 {/* Solo «Piante» è una pagina: le ancore della home non vanno segnate come attive. */}
@@ -120,7 +123,7 @@ export function LinfaHeader() {
                         <NavLink
                             to="/piante"
                             className={({ isActive }) =>
-                                `${linkClass} px-2 max-[374px]:hidden lg:hidden ${isActive ? 'underline' : ''}`
+                                `${linkClass} px-2 max-[374px]:hidden back:max-[419px]:hidden lg:hidden ${isActive ? 'underline' : ''}`
                             }
                         >
                             {t('header.plants')}

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './linfa.css'
 import './i18n'
+import './portfolio/fromPortfolio'
 import App from './App.tsx'
 
 // Su GitHub Pages il sito vive in un sottopercorso (`/linfa/`): il router lo riceve da Vite.

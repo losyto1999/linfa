@@ -1,15 +1,18 @@
 import { MotionConfig } from 'motion/react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation, useNavigationType } from 'react-router-dom'
 import { CartProvider } from './cart/CartProvider'
 import { CartDrawer } from './components/cart/CartDrawer'
 import { LinfaFooter } from './components/LinfaFooter'
 import { LinfaHeader } from './components/LinfaHeader'
+import { BackToPortfolio } from './portfolio/BackToPortfolio'
+import { cameFromPortfolio } from './portfolio/fromPortfolio'
 
 /** Header, pagina, footer e carrello a scomparsa, comuni a tutte le pagine. */
 export function LinfaLayout() {
     const location = useLocation()
     const navigationType = useNavigationType()
+    const [showBack] = useState(cameFromPortfolio)
 
     // react-router non riporta in cima la pagina nuova: lo facciamo qui, ma solo quando cambia
     // il percorso. I filtri del catalogo cambiano la query string e non devono far saltare la
@@ -27,6 +30,7 @@ export function LinfaLayout() {
         <MotionConfig reducedMotion="user">
             <CartProvider>
                 <div className="linfa-root min-h-screen">
+                    {showBack && <BackToPortfolio />}
                     <LinfaHeader />
                     <main>
                         <Outlet />
