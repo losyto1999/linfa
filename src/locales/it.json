@@ -1,0 +1,253 @@
+{
+    "numbers": { "12": "dodici" },
+    "plantCount_one": "{{count}} pianta",
+    "plantCount_other": "{{count}} piante",
+    "plantWord_one": "pianta",
+    "plantWord_other": "piante",
+    "plantFallback": "Pianta",
+    "plants": {
+        "monstera": {
+            "name": "Monstera",
+            "description": "Foglie grandi e traforate che si aprono una dopo l’altra: cresce in fretta e perdona qualche dimenticanza."
+        },
+        "pothos": {
+            "name": "Pothos",
+            "description": "Rami ricadenti con foglie a cuore screziate di giallo: sta bene su una mensola anche lontano dalla finestra."
+        },
+        "sansevieria": {
+            "name": "Sansevieria",
+            "description": "Foglie dritte e rigide come spade: si annaffia ogni due o tre settimane e sopporta la penombra."
+        },
+        "zamioculcas": {
+            "name": "Zamioculcas",
+            "description": "Foglie lucide e carnose che fanno scorta d’acqua: adatta a uffici e stanze poco luminose."
+        },
+        "pilea": {
+            "name": "Pilea",
+            "description": "Foglie tonde come monete su steli sottili; spesso mette nuove piantine alla base, da staccare e regalare."
+        },
+        "felce": {
+            "name": "Felce di Boston",
+            "description": "Fronde fitte e ricadenti che amano l’umidità: il bagno è il suo posto, se c’è una finestra."
+        },
+        "aloe": {
+            "name": "Aloe",
+            "description": "Foglie carnose piene di gel: vuole sole e poca acqua, e sul davanzale sta benissimo."
+        },
+        "calathea": {
+            "name": "Calathea",
+            "description": "Grandi foglie tonde a righe chiare: vuole il terriccio sempre appena umido, aria umida e niente sole diretto."
+        },
+        "alocasia": {
+            "name": "Alocasia",
+            "description": "Foglie a punta di freccia su lunghi steli tigrati: scenografica, chiede luce e annaffiature regolari."
+        },
+        "ficus-lyrata": {
+            "name": "Ficus lira",
+            "description": "Grandi foglie a forma di violino su un fusto dritto: vuole molta luce e non ama essere spostato."
+        },
+        "strelitzia": {
+            "name": "Strelitzia",
+            "description": "Foglie larghe come pale, che col tempo si sfrangiano: vuole tanta luce e spazio per crescere."
+        },
+        "kentia": {
+            "name": "Kentia",
+            "description": "Una palma elegante e lenta, dalle fronde arcuate: sopporta la penombra e l’aria secca dei termosifoni."
+        }
+    },
+    "levels": {
+        "light": {
+            "label": "Luce",
+            "long": ["Poca luce", "Luce indiretta", "Sole diretto"],
+            "short": ["Poca", "Indiretta", "Sole diretto"]
+        },
+        "care": {
+            "label": "Cura",
+            "long": ["Cura facile", "Cura media", "Cura da esperti"],
+            "short": ["Facile", "Media", "Da esperti"]
+        },
+        "size": {
+            "label": "Dimensione",
+            "long": ["Piccola", "Media", "Grande"],
+            "short": ["Piccola", "Media", "Grande"]
+        },
+        "withHeight": "{{label}}, {{height}} cm"
+    },
+    "priceBands": {
+        "fino-20": "Fino a 20",
+        "20-40": "20–40",
+        "oltre-40": "Oltre 40"
+    },
+    "header": {
+        "nav": "Principale",
+        "plants": "Piante",
+        "lightGuide": "Guida alla luce",
+        "faq": "Domande",
+        "promoShort": "−{{percent}}% con <code>{{code}}</code>",
+        "promoLong": "Primo ordine? Con <code>{{code}}</code> hai il {{percent}}% di sconto",
+        "promoMore": " su tutte le piante",
+        "copy": "Copia",
+        "copied": "Copiato",
+        "copySr": " il codice"
+    },
+    "footer": {
+        "tagline": "Piante da appartamento, coltivate con cura e spedite in tutta Italia.",
+        "allPlants": "Tutte le piante",
+        "bestsellers": "Le più scelte",
+        "lightGuide": "Guida alla luce",
+        "delivery": "Consegna",
+        "faq": "Domande",
+        "legal": "Spedizione {{cost}}, gratuita da {{freeFrom}} · Prezzi IVA inclusa · © {{year}} Linfa"
+    },
+    "home": {
+        "title": "Piante da appartamento, scelte una a una",
+        "intro": "Le facciamo crescere nella nostra serra e le spediamo quando sono pronte, con un cartoncino che spiega dove metterle e quanta acqua darle.",
+        "cta": "Scegli la tua pianta",
+        "deliveryTitle": "Dal vivaio a casa tua",
+        "deliveryText": "Spedizione rapida in tutta Italia a {{cost}}, gratis per ordini da {{freeFrom}}.",
+        "steps": [
+            {
+                "when": "Il giorno dell’ordine",
+                "text": "Scegliamo la tua pianta tra quelle in serra, controlliamo foglie e radici e la annaffiamo il giusto per il viaggio."
+            },
+            {
+                "when": "Il giorno dopo",
+                "text": "La avvolgiamo nella carta insieme al vaso, la fissiamo nella scatola e la affidiamo al corriere."
+            },
+            {
+                "when": "Entro 48 ore",
+                "text": "Arriva a casa tua con un cartoncino che spiega dove metterla e quanta acqua darle."
+            },
+            {
+                "when": "Nei primi 30 giorni",
+                "text": "Se arriva rovinata o non si ambienta, scrivici con una foto: te ne mandiamo un’altra."
+            }
+        ],
+        "faqTitle": "Prima di ordinare",
+        "faqIntro": "Le domande che ci fanno più spesso.",
+        "faq": [
+            {
+                "q": "Le piante arrivano con il vaso?",
+                "a": "Sì: ogni pianta viaggia nel vaso di plastica in cui è cresciuta. Puoi lasciarla così o metterla in un vaso decorativo di qualche centimetro più largo."
+            },
+            {
+                "q": "Quanto costa la spedizione?",
+                "a": "{{cost}} in tutta Italia, gratuita quando le piante nel carrello arrivano a {{freeFrom}}. La soglia si calcola prima dello sconto, quindi il codice {{code}} non te la fa perdere."
+            },
+            {
+                "q": "Come capisco se una pianta fa per me?",
+                "a": "In ogni scheda trovi tre cartellini: quanta luce vuole, quanta cura chiede e quanto è grande. Nella pagina delle piante puoi filtrarle in base alla tua stanza, al tempo che hai e al budget."
+            },
+            {
+                "q": "Le piante sono sicure per cani e gatti?",
+                "a": "Non tutte. {{safe}} sono considerate non tossiche; {{others}} e le altre possono irritare bocca e stomaco se vengono masticate."
+            },
+            {
+                "q": "E se la pianta arriva rovinata?",
+                "a": "Rispondi alla mail di conferma dell’ordine entro 30 giorni con una foto: te ne mandiamo un’altra o ti rimborsiamo, come preferisci."
+            }
+        ]
+    },
+    "bestsellers": {
+        "title": "Le più scelte",
+        "text": "Le piante che vendiamo di più. Quasi tutte richiedono poca cura: vanno bene anche se è la tua prima pianta.",
+        "carousel": "carosello",
+        "slide": "scheda",
+        "slideLabel": "{{index}} di {{total}}: {{name}}",
+        "previous": "Piante precedenti",
+        "next": "Piante successive"
+    },
+    "lightGuide": {
+        "title": "Quanta luce ha la tua stanza?",
+        "text": "Prima di scegliere una pianta guarda dove la metterai: è la luce a decidere se starà bene. Scegli quella che somiglia di più alla tua stanza.",
+        "legend": "Luce della stanza",
+        "options": {
+            "1": { "title": "Poca luce", "rooms": "Bagno, corridoio, un angolo lontano dalla finestra." },
+            "2": { "title": "Luce indiretta", "rooms": "Soggiorno o camera luminosi, a un paio di metri dalla finestra." },
+            "3": { "title": "Sole diretto", "rooms": "Davanzale, vetrata o terrazzo con qualche ora di sole." }
+        },
+        "see": {
+            "1": "Vedi le {{n}} piante per poca luce nel catalogo",
+            "2": "Vedi le {{n}} piante per luce indiretta nel catalogo",
+            "3": "Vedi le {{n}} piante da sole diretto nel catalogo"
+        }
+    },
+    "plantsPage": {
+        "title": "Le piante",
+        "intro": "{{number}} piante da appartamento, tutte cresciute nella nostra serra. Scegli quelle giuste per la luce della tua stanza, per il tempo che hai e per lo spazio.",
+        "list": "Piante",
+        "basketSummary": "Riepilogo del carrello",
+        "emptyTitle": "Nessuna pianta corrisponde a questi filtri",
+        "emptyText": "Prova a togliere uno dei filtri, oppure azzerali e riparti da tutte le piante."
+    },
+    "filters": {
+        "title": "Filtri",
+        "heading": "Filtra le piante",
+        "reset": "Azzera filtri",
+        "outOf": "su {{total}}",
+        "price": "Prezzo (€)",
+        "legend": "Nelle schede, da una a tre tacche:"
+    },
+    "card": {
+        "bestseller": "Tra le più vendute",
+        "inBasket": "{{qty}} nel carrello"
+    },
+    "addToCart": {
+        "add": "Aggiungi",
+        "added": "Aggiunta",
+        "max": "Massimo {{max}}",
+        "sr": " {{name}} al carrello"
+    },
+    "cart": {
+        "label": "Carrello",
+        "basketWithCount": "Carrello: {{plants}}",
+        "title": "Il tuo carrello",
+        "close": "Chiudi il carrello",
+        "removed": "{{name}} rimossa.",
+        "undo": "Annulla",
+        "emptyTitle": "Il carrello è vuoto",
+        "emptyText": "Premi «Aggiungi» su una pianta: qui vedrai quantità, sconto e totale. La spedizione è gratuita da {{freeFrom}}.",
+        "browse": "Guarda le piante",
+        "each": "{{price}} l’una",
+        "decrease": "Diminuisci la quantità di {{name}}",
+        "increase": "Aumenta la quantità di {{name}}",
+        "quantity": "Quantità: ",
+        "remove": "Rimuovi",
+        "removeSr": " {{name}}",
+        "subtotal": "Subtotale",
+        "discount": "Sconto {{code}} (−{{percent}}%)",
+        "shipping": "Spedizione",
+        "free": "Gratuita",
+        "total": "Totale",
+        "vat": "IVA inclusa",
+        "checkout": "Procedi all’ordine",
+        "demoNote": "Questa è una demo: il pagamento non è attivo e nessun ordine viene inviato. Il carrello resta salvato su questo dispositivo.",
+        "view": "Vedi il carrello",
+        "added": "Aggiunta al carrello",
+        "addedBar": "{{name}} aggiunta",
+        "barSr": ", {{plants}}",
+        "shippingMissing": "Ti mancano <strong>{{missing}}</strong> per la spedizione gratuita (da {{freeFrom}}).",
+        "shippingReached": "Hai la spedizione gratuita.",
+        "shippingLabel": "Spedizione gratuita",
+        "shippingValue": "{{reached}} su {{freeFrom}}"
+    },
+    "code": {
+        "label": "Codice sconto",
+        "try": "Prova <strong>{{code}}</strong>",
+        "placeholder": "Il tuo codice",
+        "apply": "Applica",
+        "remove": "Rimuovi",
+        "removeSr": " il codice sconto",
+        "appliedSr": " di sconto applicato",
+        "empty": "Scrivi un codice prima di applicarlo.",
+        "invalid": "Il codice «{{typed}}» non è valido. Controlla di averlo scritto bene."
+    },
+    "announce": {
+        "added": "{{name}} aggiunta al carrello. Nel carrello: {{plants}}.",
+        "quantity": "{{name}}: quantità {{qty}}.",
+        "removed": "{{name}} rimossa dal carrello.",
+        "restored": "{{name}} di nuovo nel carrello.",
+        "codeApplied": "Codice {{code}} applicato: {{percent}}% di sconto.",
+        "codeRemoved": "Codice sconto rimosso."
+    }
+}

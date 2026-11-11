@@ -1,0 +1,253 @@
+{
+    "numbers": { "12": "twelve" },
+    "plantCount_one": "{{count}} plant",
+    "plantCount_other": "{{count}} plants",
+    "plantWord_one": "plant",
+    "plantWord_other": "plants",
+    "plantFallback": "Plant",
+    "plants": {
+        "monstera": {
+            "name": "Monstera",
+            "description": "Big, split leaves that unfurl one after another: it grows fast and forgives the odd missed watering."
+        },
+        "pothos": {
+            "name": "Pothos",
+            "description": "Trailing vines with heart-shaped leaves flecked with yellow: happy on a shelf even far from the window."
+        },
+        "sansevieria": {
+            "name": "Snake plant",
+            "description": "Upright, stiff leaves like swords: water it every two or three weeks and it copes with dim light."
+        },
+        "zamioculcas": {
+            "name": "ZZ plant",
+            "description": "Glossy, fleshy leaves that store water: ideal for offices and dimly lit rooms."
+        },
+        "pilea": {
+            "name": "Pilea",
+            "description": "Round, coin-like leaves on slender stems; it often sprouts little plantlets at the base, ready to separate and give away."
+        },
+        "felce": {
+            "name": "Boston fern",
+            "description": "Dense, arching fronds that love humidity: the bathroom is its place, if there's a window."
+        },
+        "aloe": {
+            "name": "Aloe",
+            "description": "Fleshy leaves full of gel: it wants sun and little water, and does very well on a windowsill."
+        },
+        "calathea": {
+            "name": "Calathea",
+            "description": "Big round leaves with pale stripes: it wants the soil always just damp, humid air and no direct sun."
+        },
+        "alocasia": {
+            "name": "Alocasia",
+            "description": "Arrow-shaped leaves on long striped stems: a showpiece that asks for light and regular watering."
+        },
+        "ficus-lyrata": {
+            "name": "Fiddle-leaf fig",
+            "description": "Big violin-shaped leaves on an upright trunk: it wants plenty of light and doesn't like being moved."
+        },
+        "strelitzia": {
+            "name": "Bird of paradise",
+            "description": "Paddle-wide leaves that fray with age: it wants lots of light and room to grow."
+        },
+        "kentia": {
+            "name": "Kentia",
+            "description": "An elegant, slow-growing palm with arching fronds: it copes with dim light and the dry air of radiators."
+        }
+    },
+    "levels": {
+        "light": {
+            "label": "Light",
+            "long": ["Low light", "Indirect light", "Direct sun"],
+            "short": ["Low", "Indirect", "Direct sun"]
+        },
+        "care": {
+            "label": "Care",
+            "long": ["Easy care", "Medium care", "Expert care"],
+            "short": ["Easy", "Medium", "Expert"]
+        },
+        "size": {
+            "label": "Size",
+            "long": ["Small", "Medium", "Large"],
+            "short": ["Small", "Medium", "Large"]
+        },
+        "withHeight": "{{label}}, {{height}} cm"
+    },
+    "priceBands": {
+        "fino-20": "Up to 20",
+        "20-40": "20–40",
+        "oltre-40": "Over 40"
+    },
+    "header": {
+        "nav": "Main",
+        "plants": "Plants",
+        "lightGuide": "Light guide",
+        "faq": "FAQ",
+        "promoShort": "−{{percent}}% with <code>{{code}}</code>",
+        "promoLong": "First order? Use <code>{{code}}</code> for {{percent}}% off",
+        "promoMore": " all plants",
+        "copy": "Copy",
+        "copied": "Copied",
+        "copySr": " the code"
+    },
+    "footer": {
+        "tagline": "Houseplants, grown with care and shipped all over Italy.",
+        "allPlants": "All plants",
+        "bestsellers": "Most popular",
+        "lightGuide": "Light guide",
+        "delivery": "Delivery",
+        "faq": "FAQ",
+        "legal": "Shipping {{cost}}, free from {{freeFrom}} · Prices include VAT · © {{year}} Linfa"
+    },
+    "home": {
+        "title": "Houseplants, picked one by one",
+        "intro": "We grow them in our greenhouse and ship them when they're ready, with a card explaining where to put them and how much water to give them.",
+        "cta": "Choose your plant",
+        "deliveryTitle": "From the nursery to your home",
+        "deliveryText": "Fast shipping across Italy for {{cost}}, free on orders of {{freeFrom}} or more.",
+        "steps": [
+            {
+                "when": "The day you order",
+                "text": "We pick your plant from the ones in the greenhouse, check the leaves and roots, and water it just right for the trip."
+            },
+            {
+                "when": "The next day",
+                "text": "We wrap it in paper along with its pot, secure it in the box and hand it to the courier."
+            },
+            {
+                "when": "Within 48 hours",
+                "text": "It arrives at your door with a card explaining where to put it and how much water to give it."
+            },
+            {
+                "when": "In the first 30 days",
+                "text": "If it arrives damaged or doesn't settle in, write to us with a photo: we'll send you another."
+            }
+        ],
+        "faqTitle": "Before you order",
+        "faqIntro": "The questions we get asked most often.",
+        "faq": [
+            {
+                "q": "Do the plants come with a pot?",
+                "a": "Yes: every plant travels in the plastic pot it grew in. You can leave it as it is or move it to a decorative pot a few centimetres wider."
+            },
+            {
+                "q": "How much is shipping?",
+                "a": "{{cost}} anywhere in Italy, free when the plants in your basket reach {{freeFrom}}. The threshold is calculated before the discount, so the {{code}} code won't make you lose it."
+            },
+            {
+                "q": "How do I know if a plant is right for me?",
+                "a": "Every card has three tags: how much light it wants, how much care it needs and how big it is. On the plants page you can filter by your room, the time you have and your budget."
+            },
+            {
+                "q": "Are the plants safe for dogs and cats?",
+                "a": "Not all of them. {{safe}} are considered non-toxic; {{others}} and the rest can irritate the mouth and stomach if chewed."
+            },
+            {
+                "q": "What if the plant arrives damaged?",
+                "a": "Reply to the order confirmation email within 30 days with a photo: we'll send you another or refund you, whichever you prefer."
+            }
+        ]
+    },
+    "bestsellers": {
+        "title": "Most popular",
+        "text": "The plants we sell the most. Almost all of them need little care: they're fine even if it's your first plant.",
+        "carousel": "carousel",
+        "slide": "slide",
+        "slideLabel": "{{index}} of {{total}}: {{name}}",
+        "previous": "Previous plants",
+        "next": "Next plants"
+    },
+    "lightGuide": {
+        "title": "How much light does your room get?",
+        "text": "Before choosing a plant, look at where you'll put it: light decides whether it will thrive. Pick the option that looks most like your room.",
+        "legend": "Room light",
+        "options": {
+            "1": { "title": "Low light", "rooms": "Bathroom, hallway, a corner away from the window." },
+            "2": { "title": "Indirect light", "rooms": "A bright living room or bedroom, a couple of metres from the window." },
+            "3": { "title": "Direct sun", "rooms": "Windowsill, glass door or terrace with a few hours of sun." }
+        },
+        "see": {
+            "1": "See the {{n}} plants for low light in the shop",
+            "2": "See the {{n}} plants for indirect light in the shop",
+            "3": "See the {{n}} plants for direct sun in the shop"
+        }
+    },
+    "plantsPage": {
+        "title": "The plants",
+        "intro": "{{number}} houseplants, all grown in our greenhouse. Pick the right ones for your room's light, the time you have and the space.",
+        "list": "Plants",
+        "basketSummary": "Basket summary",
+        "emptyTitle": "No plant matches these filters",
+        "emptyText": "Try removing one of the filters, or reset them and start again from all the plants."
+    },
+    "filters": {
+        "title": "Filters",
+        "heading": "Filter the plants",
+        "reset": "Reset filters",
+        "outOf": "out of {{total}}",
+        "price": "Price (€)",
+        "legend": "On the cards, one to three marks:"
+    },
+    "card": {
+        "bestseller": "Best seller",
+        "inBasket": "{{qty}} in your basket"
+    },
+    "addToCart": {
+        "add": "Add",
+        "added": "Added",
+        "max": "Maximum {{max}}",
+        "sr": " {{name}} to the basket"
+    },
+    "cart": {
+        "label": "Basket",
+        "basketWithCount": "Basket: {{plants}}",
+        "title": "Your basket",
+        "close": "Close the basket",
+        "removed": "{{name}} removed.",
+        "undo": "Undo",
+        "emptyTitle": "Your basket is empty",
+        "emptyText": "Press “Add” on a plant: you'll see quantities, discount and total here. Shipping is free from {{freeFrom}}.",
+        "browse": "Browse the plants",
+        "each": "{{price}} each",
+        "decrease": "Decrease the quantity of {{name}}",
+        "increase": "Increase the quantity of {{name}}",
+        "quantity": "Quantity: ",
+        "remove": "Remove",
+        "removeSr": " {{name}}",
+        "subtotal": "Subtotal",
+        "discount": "Discount {{code}} (−{{percent}}%)",
+        "shipping": "Shipping",
+        "free": "Free",
+        "total": "Total",
+        "vat": "VAT included",
+        "checkout": "Proceed to checkout",
+        "demoNote": "This is a demo: payment is not active and no order is sent. Your basket stays saved on this device.",
+        "view": "View basket",
+        "added": "Added to basket",
+        "addedBar": "{{name}} added",
+        "barSr": ", {{plants}}",
+        "shippingMissing": "You're <strong>{{missing}}</strong> away from free shipping (from {{freeFrom}}).",
+        "shippingReached": "You've got free shipping.",
+        "shippingLabel": "Free shipping",
+        "shippingValue": "{{reached}} of {{freeFrom}}"
+    },
+    "code": {
+        "label": "Discount code",
+        "try": "Try <strong>{{code}}</strong>",
+        "placeholder": "Your code",
+        "apply": "Apply",
+        "remove": "Remove",
+        "removeSr": " the discount code",
+        "appliedSr": " discount applied",
+        "empty": "Enter a code before applying it.",
+        "invalid": "The code “{{typed}}” isn't valid. Check that you typed it correctly."
+    },
+    "announce": {
+        "added": "{{name}} added to the basket. In the basket: {{plants}}.",
+        "quantity": "{{name}}: quantity {{qty}}.",
+        "removed": "{{name}} removed from the basket.",
+        "restored": "{{name}} back in the basket.",
+        "codeApplied": "Code {{code}} applied: {{percent}}% off.",
+        "codeRemoved": "Discount code removed."
+    }
+}

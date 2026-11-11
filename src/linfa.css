@@ -1,0 +1,80 @@
+@import 'tailwindcss' source(none);
+@import '@fontsource-variable/fraunces/full.css';
+@import '@fontsource-variable/figtree';
+
+@source './';
+
+@theme {
+    /* Fraunces con l'asse SOFT al massimo (vedi .linfa-root h1…) per i titoli, Figtree per il testo. */
+    --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+    --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
+
+    /* Palette "avocado": i cinque colori del brief (i valori in maiuscolo) più variazioni di
+       luminosità degli stessi. Contrasti AA verificati: vedi README.md. */
+    --color-nocciolo-500: #8a623d;
+    --color-nocciolo-700: #704012;
+    --color-nocciolo-800: #5a330e;
+    --color-nocciolo-900: #492a0c;
+
+    --color-buccia-50: #f2f5f1;
+    --color-buccia-100: #e4eae1;
+    --color-buccia-200: #c9d5c3;
+    --color-buccia-600: #4A7337;
+    --color-buccia-700: #416530;
+    --color-buccia-800: #385629;
+
+    --color-foglia-100: #e9eede;
+    --color-foglia-300: #a6ba7a;
+    --color-foglia-500: #6B8C21;
+    --color-foglia-700: #506919;
+
+    --color-polpa-25: #fcfbf4;
+    --color-polpa-50: #f8f6e9;
+    --color-polpa-100: #f1eed2;
+    --color-polpa-200: #e9e3b6;
+    --color-polpa-300: #DDD48F;
+
+    --color-argilla-50: #f5eee7;
+    --color-argilla-100: #ebddd0;
+    --color-argilla-200: #dfc7b2;
+    --color-argilla-300: #CDA989;
+    --color-argilla-500: #a4876e;
+    --color-argilla-700: #77624f;
+
+    --shadow-vaso: 0 1px 2px rgb(73 42 12 / 0.08), 0 12px 28px -14px rgb(73 42 12 / 0.35);
+}
+
+@layer base {
+    .linfa-root {
+        @apply bg-polpa-50 font-sans text-nocciolo-700 antialiased;
+    }
+
+    .linfa-root h1,
+    .linfa-root h2,
+    .linfa-root h3 {
+        @apply font-display text-nocciolo-800;
+        font-variation-settings: 'SOFT' 100;
+        text-wrap: balance;
+    }
+
+    .linfa-root ::selection {
+        @apply bg-polpa-300 text-nocciolo-900;
+    }
+
+    .linfa-root :focus-visible {
+        @apply outline-2 outline-offset-2 outline-buccia-600;
+    }
+
+    /* Con il pannello del carrello aperto la pagina sotto non scorre. */
+    html:has(.linfa-drawer[open]) {
+        overflow: hidden;
+    }
+}
+
+@utility no-scrollbar {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
